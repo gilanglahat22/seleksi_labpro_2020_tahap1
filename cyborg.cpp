@@ -191,39 +191,39 @@ void solve(){
     }
     if(lower == N){
         cout << sum << "\n";
-        return;
-    }
-    sum = 0;
-    prevX = 0;
-    prevY = 0;
-    rep(i,0,lower-1){
-        sum += B[i];
-        prevX += arahX[i] * B[i];
-        prevY += arahY[i] * B[i];
-    }
-    ll lower2 = 0, Upper2 = B[lower];
-    while(Upper2 - lower2 >= 2){
-        ll done = 0;
-        ll tengah = (Upper2 + lower2)/2;
+    }else{
+        sum = 0;
+        prevX = 0;
+        prevY = 0;
         rep(i,0,lower-1){
-            vi tempV1 = {prevX,prevY,prevX + (arahX[lower] * (tengah-1)), prevY + (arahY[lower] * (tengah-1))};
-            vi tempV2 = {tampungGaris[i].first.first,tampungGaris[i].first.second,tampungGaris[i].second.first,tampungGaris[i].second.second};
-            if(tempV1[2] < tempV1[0]){
-                swap(tempV1[2],tempV1[0]);
-            }if(tempV1[3] < tempV1[1]){
-                swap(tempV1[3],tempV1[1]);
-            }if((max(tempV1[0],tempV2[0]) <= min(tempV1[2],tempV2[2])) && (max(tempV1[1],tempV2[1]) <= min(tempV1[3],tempV2[3]))){
-                done = 1;
-                break;
+            sum += B[i];
+            prevX += arahX[i] * B[i];
+            prevY += arahY[i] * B[i];
+        }
+        ll lower2 = 0, Upper2 = B[lower];
+        while(Upper2 - lower2 >= 2){
+            ll done = 0;
+            ll tengah = (Upper2 + lower2)/2;
+            rep(i,0,lower-1){
+                vi tempV1 = {prevX,prevY,prevX + (arahX[lower] * (tengah-1)), prevY + (arahY[lower] * (tengah-1))};
+                vi tempV2 = {tampungGaris[i].first.first,tampungGaris[i].first.second,tampungGaris[i].second.first,tampungGaris[i].second.second};
+                if(tempV1[2] < tempV1[0]){
+                    swap(tempV1[2],tempV1[0]);
+                }if(tempV1[3] < tempV1[1]){
+                    swap(tempV1[3],tempV1[1]);
+                }if((max(tempV1[0],tempV2[0]) <= min(tempV1[2],tempV2[2])) && (max(tempV1[1],tempV2[1]) <= min(tempV1[3],tempV2[3]))){
+                    done = 1;
+                    break;
+                }
             }
-        }
-        if(done){
-            Upper2 = tengah;
-        }else{
-            lower2 = tengah;
-        }
-    } 
-    cout << sum + lower2<< "\n";
+            if(done){
+                Upper2 = tengah;
+            }else{
+                lower2 = tengah;
+            }
+        } 
+        cout << sum + lower2<< "\n";
+    }
 }
  
 int main() {
