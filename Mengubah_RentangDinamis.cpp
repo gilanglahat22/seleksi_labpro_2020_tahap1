@@ -69,58 +69,58 @@ bitset<1299709> Primes;
 ll x4[] = {0,0,1,-1};
 ll y4[] = {1,-1,0,0};
  
-void BuildTree(vector<pair<ll,ll> > & tree, vector<ll> & ara, ll b, ll e, ll node)
+void BuildTree(vector<pair<ll,ll> > & tree, vector<ll> & arr, ll b, ll e, ll node)
 {
     if(b == e){
-        tree[node].first = ara[b];
+        tree[node].first = arr[b];
         tree[node].second = 0;
         return;
     }
     ll left = node << 1;
     ll right = left+1;
     ll mid = (b+e) >> 1;
-    BuildTree(tree,ara,b,mid,left);
-    BuildTree(tree,ara,mid+1,e,right);
+    BuildTree(tree,arr,b,mid,left);
+    BuildTree(tree,arr,mid+1,e,right);
  
     tree[node].first = tree[left].first + tree[right].first;
 }
  
-ll query(vector<pair<ll,ll> > & ara, ll b, ll e, ll node, ll i, ll carry)
+ll query(vector<pair<ll,ll> > & arr, ll b, ll e, ll node, ll i, ll carry)
 {
     if(b > i or e < i){
         return 0LL;
     }
     if(b >= i and e <= i){
-        return ara[node].first+(carry*(e-b+1));
+        return arr[node].first+(carry*(e-b+1));
     }
     ll left = node << 1;
     ll right = left+1;
     ll mid = (b+e) >> 1;
  
-    ll x = query(ara,b,mid,left,i,carry+ara[node].second);
-    ll y = query(ara,mid+1,e,right,i,carry+ara[node].second);
+    ll x = query(arr,b,mid,left,i,carry+arr[node].second);
+    ll y = query(arr,mid+1,e,right,i,carry+arr[node].second);
  
     return (x+y);
 }
  
-void update(vector<pair<ll,ll> > & ara, ll b, ll e, ll node, ll i, ll j, ll  u)
+void update(vector<pair<ll,ll> > & arr, ll b, ll e, ll node, ll i, ll j, ll  u)
 {
     if(b > j or e < i){
         return;
     }
     if(b >= i and e <= j){
-        ara[node].first+=((e-b+1)*u);
-        ara[node].second+=u;
+        arr[node].first+=((e-b+1)*u);
+        arr[node].second+=u;
         return;
     }
     ll left = node << 1;
     ll right = left+1;
     ll mid = (b+e) >> 1;
  
-    update(ara,b,mid,left,i,j,u);
-    update(ara,mid+1,e,right,i,j,u);
+    update(arr,b,mid,left,i,j,u);
+    update(arr,mid+1,e,right,i,j,u);
  
-    ara[node].first = ara[left].first+ara[right].first + ara[node].second*(e-b+1);
+    arr[node].first = arr[left].first+arr[right].first + arr[node].second*(e-b+1);
 }
 
 void solve(){
@@ -146,12 +146,12 @@ void solve(){
     }
     ll N,Q;
     cin >> N >> Q;
-    vector<ll> ara(N+1);
+    vector<ll> arr(N+1);
     vector<pair<ll,ll> > tree(4*N);
     rep(i,1,N){
-        cin >> ara[i];
+        cin >> arr[i];
     }
-    BuildTree(tree,ara,1,N,1);
+    BuildTree(tree,arr,1,N,1);
     ll tipe,A,B,X;
     while(Q--){
         cin >> tipe;

@@ -102,7 +102,7 @@ string Find(int n, int k)
     
     itr = s.begin();
  
-    k = k - 1;
+    k--;
  
     rep(i,0,n-1) {
  

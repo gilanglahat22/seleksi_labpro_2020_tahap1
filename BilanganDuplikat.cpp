@@ -65,7 +65,7 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 void solve(){
     ll N; cin >> N;
-    ll A[N];
+    ll A[N+1];
     rep(i, 0, N){
         cin >> A[i];
     }
