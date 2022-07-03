@@ -67,19 +67,19 @@ mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 ll isYa(string s)
 { 
     sc tampung;
-    for(int i=0;i<s.length();i++)
+    trav(kata,s)
     {
         if(tampung.empty())
         {
-            tampung.push(s[i]);
+            tampung.push(kata);
         }
-        else if((tampung.top()=='{' && s[i]=='}')  ||  (tampung.top()=='[' && s[i]==']') || (tampung.top()=='('&& s[i]==')'))
+        else if((tampung.top()=='{' && kata =='}')  ||  (tampung.top()=='[' && kata ==']') || (tampung.top()=='('&& kata ==')'))
         {
             tampung.pop();
         }
         else
         {
-            tampung.push(s[i]);
+            tampung.push(kata);
         }
     }
     if(tampung.empty())
@@ -92,8 +92,10 @@ ll isYa(string s)
 
 void solve(){
     ll N; cin >> N;
+    string s;
+    getline(cin, s);
     while(N--){
-        string s; cin >> s;
+        getline(cin, s);
         cout << isYa(s) << "\n";
     }
 }
