@@ -63,7 +63,6 @@ const ld eps = 1e-10, pi = acos(-1.0);
  
 mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
 
-// Logic to find kth at permutation of n first number 
 string Find(int N, int M)
 {
     int temp = 1;
